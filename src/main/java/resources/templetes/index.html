@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Triangle Calculator</h2>
+
+<form action="/calculate" method="post">
+    <input name="a" placeholder="Side A"/>
+    <input name="b" placeholder="Side B"/>
+    <input name="c" placeholder="Side C"/>
+    <button type="submit">Calculate</button>
+</form>
+
+<div th:if="${valid}">
+    <p>Perimeter: <span th:text="${perimeter}"></span></p>
+    <p>Area: <span th:text="${area}"></span></p>
+</div>
+
+<div th:if="${valid == false}">
+    <p>Invalid triangle</p>
+</div>
+</body>
+</html>
