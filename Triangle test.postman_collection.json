@@ -1,0 +1,162 @@
+{
+  "info": {
+    "_postman_id": "a347bc58-b2ec-4690-aa27-4d8453d7717d",
+    "name": "Triangle test",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53828755",
+    "_collection_link": "https://go.postman.co/collection/53828755-a347bc58-b2ec-4690-aa27-4d8453d7717d?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Valid traingle",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Triangle is valid\", function () {\r",
+              "    let json = pm.response.json();\r",
+              "    pm.expect(json.valid).to.eql(true);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Correct perimeter\", function () {\r",
+              "    let json = pm.response.json();\r",
+              "    pm.expect(json.perimeter).to.eql(12);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Correct area\", function () {\r",
+              "    let json = pm.response.json();\r",
+              "    pm.expect(json.area).to.eql(6);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/triangle?a=3&b=4&c=5",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "triangle"
+          ],
+          "query": [
+            {
+              "key": "a",
+              "value": "3"
+            },
+            {
+              "key": "b",
+              "value": "4"
+            },
+            {
+              "key": "c",
+              "value": "5"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Invalid triangle",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Triangle is invalid\", function () {\r",
+              "    let json = pm.response.json();\r",
+              "    pm.expect(json.valid).to.eql(false);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/triangle?a=1&b=2&c=10",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "triangle"
+          ],
+          "query": [
+            {
+              "key": "a",
+              "value": "1"
+            },
+            {
+              "key": "b",
+              "value": "2"
+            },
+            {
+              "key": "c",
+              "value": "10"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Random",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.variables.set(\"a\", Math.floor(Math.random()*10)+1);\r",
+              "pm.variables.set(\"b\", Math.floor(Math.random()*10)+1);\r",
+              "pm.variables.set(\"c\", Math.floor(Math.random()*10)+1);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "let json = pm.response.json();\r",
+              "if (json.valid==true)\r",
+              "    let json = pm.response.json();\r",
+              "    pm.expect(json.perimeter).to.eql(a+b+c);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    }
+  ]
+}
